@@ -4,14 +4,14 @@ from mongoengine import Document, StringField, ListField, ReferenceField, IntFie
 class User(Document):
     username = StringField(required=True, unique=True)
     email = StringField(required=True, unique=True)
-    favorites = ListField(ReferenceField('Recipe'))
+    favorites = ListField(ReferenceField('Recipe'))  # Список избранных рецептов пользователя
 
 
 class Recipe(Document):
     DoesNotExist = None
     title = StringField(required=True)
     description = StringField()
-    ingredients = ListField(StringField())
+    ingredients = ListField(StringField())  # Список ингредиентов
     instructions = StringField()
-    category = StringField()
-    likes = IntField(default=0)
+    category = StringField()  # Категория рецепта (например, завтрак, ужин и т.д.)
+    likes = IntField(default=0)  # Количество лайков

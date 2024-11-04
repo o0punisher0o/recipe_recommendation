@@ -27,23 +27,22 @@ DEBUG = True
 
 ALLOWED_HOSTS = []
 
-
 from mongoengine import connect
 
 DATABASES = {
     'default': {
-        'ENGINE': 'django.db.backends.dummy'  # Отключаем стандартный ORM
+        'ENGINE': 'django.db.backends.dummy'  # Отключаем стандартный ORM Django
     }
 }
 
+# Подключение к MongoDB
 connect(
     db='recipeDB',
-    host='localhost',  # Если MongoDB локально, для MongoDB Atlas укажите URL
-    port=27017,
-    username='your_username',
-    password='your_password'
+    host='localhost',  # Укажите URL вашего MongoDB Atlas, если используете облако
+    port=27017,        # Порт для локального MongoDB
+    username='your_username',  # Ваше имя пользователя для MongoDB
+    password='your_password'   # Ваш пароль для MongoDB
 )
-
 
 # Application definition
 
