@@ -3,8 +3,8 @@ from django.http import JsonResponse
 from .models import Recipe, User
 
 
-def recipe_list(request):
-    recipes = Recipe.objects()
+def get_recipes(request):
+    recipes = Recipe.objects.all()  # Для MongoEngine используйте аналогичный запрос
     data = [{"title": recipe.title, "description": recipe.description} for recipe in recipes]
     return JsonResponse(data, safe=False)
 

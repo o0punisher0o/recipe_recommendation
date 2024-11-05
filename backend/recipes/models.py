@@ -1,4 +1,5 @@
 from mongoengine import Document, StringField, ListField, ReferenceField, IntField
+from django.db import models
 
 
 class User(Document):
@@ -15,3 +16,4 @@ class Recipe(Document):
     instructions = StringField()
     category = StringField()  # Категория рецепта (например, завтрак, ужин и т.д.)
     likes = IntField(default=0)  # Количество лайков
+
