@@ -1,27 +1,8 @@
-from django.shortcuts import render
 from django.http import JsonResponse
-from .models import Recipe, User
+from .mongodb import get_recipe_by_title
+import asyncio
 
-
-def get_recipes(request):
-    recipes = Recipe.objects.all()  # Для MongoEngine используйте аналогичный запрос
-    data = [{"title": recipe.title, "description": recipe.description} for recipe in recipes]
-    return JsonResponse(data, safe=False)
-
-
-def recipe_detail(request, recipe_id):
-    try:
-        recipe = Recipe.objects.get(id=recipe_id)
-        data = {
-            "title": recipe.title,
-            "description": recipe.description,
-            "ingredients": recipe.ingredients,
-            "instructions": recipe.instructions
-        }
-        return JsonResponse(data)
-    except Recipe.DoesNotExist:
-        return JsonResponse({"error": "Recipe not found"}, status=404)
-
-
-def user_favorites(request):
-    return None
+async def recipe_view(request):
+    title = "Спагетти Болоньезе"  # Замените на нужное значение
+    document = await get_recipe_by_title(title)
+    return JsonResponse(document)

@@ -1,19 +1,11 @@
-from mongoengine import Document, StringField, ListField, ReferenceField, IntField
-from django.db import models
+from djongo import models
 
+class Recipe(models.Model):
+    title = models.CharField(max_length=100)
+    description = models.TextField()
+    ingredients = models.ListField()
+    instructions = models.TextField()
+    category = models.CharField(max_length=50)
 
-class User(Document):
-    username = StringField(required=True, unique=True)
-    email = StringField(required=True, unique=True)
-    favorites = ListField(ReferenceField('Recipe'))  # Список избранных рецептов пользователя
-
-
-class Recipe(Document):
-    DoesNotExist = None
-    title = StringField(required=True)
-    description = StringField()
-    ingredients = ListField(StringField())  # Список ингредиентов
-    instructions = StringField()
-    category = StringField()  # Категория рецепта (например, завтрак, ужин и т.д.)
-    likes = IntField(default=0)  # Количество лайков
-
+    def __str__(self):
+        return self.title
